@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lino - Scratch Trainer</title>
+	<link rel="icon" type="image/x-icon" href="img/dj_white.svg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body class="white">
+	<div class="conf-element">
+		<div class="setting-container center">
+			<img class="menu-item" data-click-action="playlist" src="img/playlist.svg">
+			<img class="menu-item" data-click-action="file" src="img/file.svg">
+			<img class="menu-item" data-click-action="playback-rate" src="img/mixer.svg">
+			<img class="menu-item" data-click-action="playback-volume" src="img/volume.svg">
+			<img class="menu-item" data-click-action="rate-auto" src="img/rate.svg">
+			<img class="menu-item" data-click-action="player" src="img/player.svg">
+			<img class="menu-item" data-click-action="theme" src="img/theme.svg">
+		</div>
+	</div>
+	<div id="playlist" class="conf-element">
+		<div class="playlist-item">
+			<img class="menu-item track" data-track-name="track1" src="img/play.svg">
+			<label>beat dj groovy brass - REDproductions</label>
+		</div>
+		<div class="playlist-item">
+			<img class="menu-item track" data-track-name="track2" src="img/play.svg">
+			<label>boom bap groove - Anton-Vlasov</label>
+		</div>
+		<div class="playlist-item">
+			<img class="menu-item track" data-track-name="track3" src="img/play.svg">
+			<label>cupcake - SoulProdMusic</label>
+		</div>
+		<div class="playlist-item">
+			<img class="menu-item track" data-track-name="track4" src="img/play.svg">
+			<label>funky hip hop - The-Mountain</label>
+		</div>
+		<div class="playlist-item">
+			<img class="menu-item track" data-track-name="track5" src="img/play.svg">
+			<label>let'emknow - u ytupjhvwdt</label>
+		</div>
+	</div>
+	<div id="file" class="conf-element">
+		<div class="file-upload">
+		  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Browse Song</button>
+		  <input id="audio-upload" class="file-upload-input" type='file' accept="file/*" />
+		</div>
+	</div>
+
+	<div id="playback-rate" class="conf-element rate-container">
+	  <label for="rate">Adjust playback rate:</label>&nbsp;&nbsp;<label class="info-text">(Min: 0.25 | Max: 3)</label>
+	  <input id="rate" type="range" min="0.25" max="3" step="0.01" value="1" />
+	  <div class="center info-text">Current: <span id="current-pitch">1</span></div>
+	</div>
+
+	<div id="playback-volume" class="conf-element pitch-container">
+		<label for="volume">Adjust playback volume:</label>
+		<input id="volume" type="range" min="0" max="1" step="0.01" value="1" />
+	  	
+	  	<div class="center">
+		  	<label for="pitch">Preserve track pitch:</label>
+		  	<input type="checkbox" id="pitch" name="pitch" checked />
+		  </div>
+	</div>
+
+	<div id="rate-auto" class="conf-element">
+		<div class="growth">
+			<div class="rate-settings-container center">
+				<div class="rate-settings">
+					<span class="rate-title">Rate growth</span>
+					<input id="rate-growth" type="number" name="rate-growth">
+				</div>
+				<div class="rate-settings">
+					<span class="info-text">(minimum unit 0.01)</span>
+				</div>
+			</div>
+			<div class="rate-settings-container center">
+				<div class="rate-settings">
+					<span class="rate-title">Seconds</span>
+					<input id="seconds-growth" type="number" name="seconds-growth">
+				</div>
+				<div class="rate-settings">
+					<span class="info-text">taken for each growth</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="growth center">
+			<button id="start-auto-rate" disabled onclick="startAutoRate()">AUTO!</button>
+			<button id="stop-auto-rate" disabled onclick="stopAutoRate()">STOP!</button>
+		</div>
+	</div>
+
+	<div id="player" class="conf-element center">
+		<div id="audio-player-container">
+			<span id="info-choose-song" class="info-text">Choose a song first...</span>
+		</div>
+	</div>
+
+	<div id="theme" class="conf-element center">
+		<div class="theme-selector">
+			<span>Change theme color</span>
+		</div>
+		<div>
+			<div class="theme-color black" data-color="black"></div>
+			<div class="theme-color blue" data-color="blue"></div>
+			<div class="theme-color gray" data-color="gray"></div>
+			<div class="theme-color purple" data-color="purple"></div>
+			<div class="theme-color white" data-color="white"></div>
+		</div>
+
+		<div class="custom">
+			<button onclick="customSettings()">Go custom!</button>
+			<div id="custom-settings">
+				<div class="custom-setting">
+					Background
+					<input type="color" id="picker-background" class="custom-picker" data-var-key="background" value="#ffffff">
+				</div>
+	    		<div class="custom-setting">
+	    			Text color
+	    			<input type="color" id="picker-text-color" class="custom-picker" data-var-key="text-color" value="#ffffff">
+	    		</div>
+	    		<div class="custom-setting">
+	    			Main background
+	    			<input type="color" id="picker-main-background" class="custom-picker" data-var-key="main-background" value="#ffffff">
+	    		</div>
+	    		<div class="custom-setting">
+	    			Main border
+	    			<input type="color" id="picker-main-border" class="custom-picker" data-var-key="main-border" value="#ffffff">
+	    		</div>
+	    		<div class="custom-setting">
+	    			Main background hover
+	    			<input type="color" id="picker-main-background-hover" class="custom-picker" data-var-key="main-background-hover" value="#ffffff">
+	    		</div>
+	    		<div class="custom-setting">
+	    			Main border hover
+	    			<input type="color" id="picker-main-border-hover" class="custom-picker" data-var-key="main-border-hover" value="#ffffff">
+	    		</div>
+
+	    		<button onclick="customPickerStyling()">Save</button>
+			 </div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
