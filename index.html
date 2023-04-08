@@ -2,48 +2,56 @@
 <html>
 <head>
 	<title>Lino - Scratch Trainer</title>
-	<link rel="icon" type="image/x-icon" href="img/dj_white.svg">
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/x-icon" href="img/dj_white.svg">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
 	<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/local_storage.js"></script>
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body class="white">
-	<div class="conf-element">
+	<div id="menu" class="conf-element">
 		<div class="setting-container center">
-			<img class="menu-item" data-click-action="playlist" src="img/playlist.svg">
-			<img class="menu-item" data-click-action="file" src="img/file.svg">
-			<img class="menu-item" data-click-action="playback-rate" src="img/mixer.svg">
-			<img class="menu-item" data-click-action="playback-volume" src="img/volume.svg">
-			<img class="menu-item" data-click-action="rate-auto" src="img/rate.svg">
-			<img class="menu-item" data-click-action="player" src="img/player.svg">
-			<img class="menu-item" data-click-action="theme" src="img/theme.svg">
+			<img class="menu-item" data-click-action="playlist" src="img/playlist_white.svg">
+			<img class="menu-item" data-click-action="file" src="img/file_white.svg">
+			<img class="menu-item" data-click-action="player" src="img/player_white.svg">
+			<img class="menu-item" data-click-action="looper" src="img/loop_white.svg">
+			<br class="small-devices">
+			<img class="menu-item" data-click-action="playback-rate" src="img/mixer_white.svg">
+			<img class="menu-item" data-click-action="playback-volume" src="img/volume_white.svg">
+			<img class="menu-item" data-click-action="rate-auto" src="img/rate_white.svg">
+			<img class="menu-item" data-click-action="theme" src="img/theme_white.svg">
 		</div>
 	</div>
 	<div id="playlist" class="conf-element">
 		<div class="playlist-item">
-			<img class="menu-item track" data-track-name="track1" src="img/play.svg">
+			<img class="menu-item track" data-track-name="track1" src="img/play_white.svg">
 			<label>beat dj groovy brass - REDproductions</label>
 		</div>
 		<div class="playlist-item">
-			<img class="menu-item track" data-track-name="track2" src="img/play.svg">
+			<img class="menu-item track" data-track-name="track2" src="img/play_white.svg">
 			<label>boom bap groove - Anton-Vlasov</label>
 		</div>
 		<div class="playlist-item">
-			<img class="menu-item track" data-track-name="track3" src="img/play.svg">
+			<img class="menu-item track" data-track-name="track3" src="img/play_white.svg">
 			<label>cupcake - SoulProdMusic</label>
 		</div>
 		<div class="playlist-item">
-			<img class="menu-item track" data-track-name="track4" src="img/play.svg">
+			<img class="menu-item track" data-track-name="track4" src="img/play_white.svg">
 			<label>funky hip hop - The-Mountain</label>
 		</div>
 		<div class="playlist-item">
-			<img class="menu-item track" data-track-name="track5" src="img/play.svg">
+			<img class="menu-item track" data-track-name="track5" src="img/play_white.svg">
 			<label>let'emknow - u ytupjhvwdt</label>
 		</div>
 	</div>
+
 	<div id="file" class="conf-element">
 		<div class="file-upload">
 		  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Browse Song</button>
@@ -51,10 +59,45 @@
 		</div>
 	</div>
 
+	<div id="player" class="conf-element center">
+		<div id="audio-player-container">
+			<span id="info-choose-song" class="info-text">Choose a song first...</span>
+		</div>
+	</div>
+
+	<div id="looper" class="conf-element center">
+		<div>
+			<label class="loop-setting-main" for="loop">Loop:</label>
+		  	<input class="loop-setting-main" type="checkbox" id="loop" name="loop" />
+	  	</div>
+
+	  	<div>
+		  	<input class="loop-setting" type="radio" id="loop-full" name="loop" value="full" />
+	  	    <label class="loop-setting" for="loop-full">Loop full track</label>
+
+	  	    <input class="loop-setting" type="radio" id="loop-partially" name="loop" value="partially" />
+	  	    <label class="loop-setting" for="loop-partially">Loop partially</label>
+	  	</div>
+	  	<div>
+		  	<label class="loop-setting-partially">From</label>
+		  	<input class="loop-setting-partially" type="number" id="loop-start" name="loop-start">
+		  	<label class="loop-setting-partially">To</label>
+		  	<input class="loop-setting-partially" type="number" id="loop-end" name="loop-end">
+		  	<div>
+		  		<button id="loop-partially-action" class="loop-setting-partially" disabled>Loop!</button>
+		  	</div>
+		</div>
+	</div>
+
 	<div id="playback-rate" class="conf-element rate-container">
 	  <label for="rate">Adjust playback rate:</label>&nbsp;&nbsp;<label class="info-text">(Min: 0.25 | Max: 3)</label>
 	  <input id="rate" type="range" min="0.25" max="3" step="0.01" value="1" />
-	  <div class="center info-text">Current: <span id="current-pitch">1</span></div>
+	  <div class="center info-text">
+	  	Current: <span id="current-pitch">1</span>
+	  </div>
+	  <div class="center">
+	  	<button class="rate-reset" onclick="rateReset()">Reset</button>
+	  </div>
 	</div>
 
 	<div id="playback-volume" class="conf-element pitch-container">
@@ -95,12 +138,6 @@
 		</div>
 	</div>
 
-	<div id="player" class="conf-element center">
-		<div id="audio-player-container">
-			<span id="info-choose-song" class="info-text">Choose a song first...</span>
-		</div>
-	</div>
-
 	<div id="theme" class="conf-element center">
 		<div class="theme-selector">
 			<span>Change theme color</span>
@@ -108,9 +145,9 @@
 		<div>
 			<div class="theme-color black" data-color="black"></div>
 			<div class="theme-color blue" data-color="blue"></div>
+			<div class="theme-color green" data-color="green"></div>
 			<div class="theme-color gray" data-color="gray"></div>
 			<div class="theme-color purple" data-color="purple"></div>
-			<div class="theme-color white" data-color="white"></div>
 		</div>
 
 		<div class="custom">
@@ -146,6 +183,7 @@
 		</div>
 	</div>
 
+	<script type="text/javascript" src="js/constants.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

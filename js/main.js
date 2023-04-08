@@ -7,10 +7,19 @@ https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/preservesPitch
 let rateGrowthInterval;
 let currentRate = $('#rate').val();
 
-const audio = document.createElement("audio");
-audio.controls = "true";
+let loopStart = document.querySelector("#loop-start");
+let loopEnd = document.querySelector("#loop-end");
+let loopStartTimestamp;
+let loopEndTimestamp;
 
-const rate = document.querySelector("#rate");
+audio.controls = "true";
+audio.autoplay = "true"
+
+
+$(document).ready(function() {
+	setPresetStyles(getPresetStyles());
+	setCustomStyles(getCustomStyles());
+});
 
 function customSettings() {
 	$('#custom-settings').toggle();
@@ -27,30 +36,6 @@ function customPickerStyling() {
 	
 	setCustomStyles(customStyle);
 	saveCustomStyles(customStyle);
-}
-
-$(document).ready(function() {
-	setCustomStyles(getCustomStyles())
-});
-
-function setCustomStyles(customStyle) {
-	if (localStorage.getItem('custom-styling') === null) {
-	  return;
-	}
-	$('head').append(customStyle);
-	$('body').removeAttr('class').addClass('custom');
-}
-
-function saveCustomStyles(customStyle) {
-	window.localStorage.setItem('custom-styling', customStyle);
-}
-
-function getCustomStyles() {
-	return window.localStorage.getItem('custom-styling');
-}
-
-function removeCustomStyles() {
-	window.localStorage.removeItem('custom-styling');
 }
 
 function changeHandler({
@@ -118,11 +103,82 @@ function addAudio() {
 	document.querySelector("#audio-player-container").append(audio);
 	$('#info-choose-song').hide();
 }
+$('#loop').click(function() {
+	if ($(this).prop('checked')) {
+		$('.loop-setting').show();
+	}
+	else {
+		$('.loop-setting').hide();
+		loopFull.checked = false;
+		loopPartially.checked = false;
+		$('.loop-setting-partially').hide();
+
+		if (typeof loopInterval == 'undefined') {
+		    return;
+		}
+		clearInterval(loopInterval);
+	}
+});
+$(loopFull).click(function() {
+	toggleLoopFull();
+	$('.loop-setting-partially').hide();
+
+	if (typeof loopInterval == 'undefined') {
+	    return;
+	}
+	clearInterval(loopInterval);
+})
+$(loopPartially).click(function() {
+	$('.loop-setting-partially').show();
+	toggleLoopFull();
+})
+
+$('#loop-partially-action').click(function() {
+	enableLoopPartially();
+})
+function toggleLoopFull() {
+	audio.loop = loopFull.checked;
+}
+function enableLoopPartially() {
+	loopInterval = setInterval(checkLoop, 300);
+	loopStartTimestamp = $(loopStart).val();
+	loopEndTimestamp = $(loopEnd).val();
+
+	function checkLoop() {
+		if (audio.currentTime >= loopEndTimestamp) {
+			audio.pause();
+
+			audio.currentTime = loopStartTimestamp;
+			audio.play()
+		}
+	}
+}
+
+document.getElementById("loop-start").addEventListener("input", enablePartiallyButton);
+document.getElementById("loop-end").addEventListener("input", enablePartiallyButton);
+function enablePartiallyButton() {
+	let loopStart = $('#loop-start').val();
+	let loopEnd = $('#loop-end').val();
+
+	if (loopStart != undefined && loopStart > 0 && loopEnd != undefined && loopEnd > 0) {
+		$('#loop-partially-action').prop('disabled', false);
+	}
+	else {
+		$('#loop-partially-action').prop('disabled', true);
+	}
+}
 
 function stopAutoRate() {
 	clearInterval(rateGrowthInterval);
 	enableAuto();
 	$('#stop-auto-rate').prop('disabled', true);
+}
+
+function rateReset() {
+	$('#rate').val(1);
+	currentRate = $('#rate').val();
+	audio.playbackRate = $('#rate').val();
+	setCurrentPitchValue();
 }
 
 function setCurrentPitchValue() {
@@ -154,11 +210,12 @@ $('#volume').on('input', function() {
 })
 
 $('.track').click(function() {
+	$('.track.menu-item').removeClass('selected')
+	$(this).addClass('selected');
 	let trackName = $(this).attr('data-track-name');
 	trackName = `music/${trackName}.mp3`;
 	audio.src = trackName;
 	addAudio();
-
 });
 
 $('.menu-item').click(function() {
@@ -170,4 +227,5 @@ $('.menu-item').click(function() {
 $('.theme-color').click(function() {
 	removeCustomStyles();
 	$('body').removeAttr('class').addClass($(this).attr('data-color'));
+	savePresetStyling();
 });
