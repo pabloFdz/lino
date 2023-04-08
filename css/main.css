@@ -261,7 +261,7 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: var(--main-background);
 }
-@media (max-width: 380px) {
+@media (max-width: 300px) {
   .small-devices {display: inherit}
 }
 @media (min-width: 680px) {
