@@ -12,9 +12,9 @@ let loopEnd = document.querySelector("#loop-end");
 let loopStartTimestamp;
 let loopEndTimestamp;
 
-audio.controls = "true";
-audio.autoplay = "true"
+let buffer = .1;
 
+let pitchValue = true;
 
 $(document).ready(function() {
 	setPresetStyles(getPresetStyles());
@@ -24,7 +24,14 @@ $(document).ready(function() {
 function customSettings() {
 	$('#custom-settings').toggle();
 }
-
+$('.custom-picker').on( "input", function() {
+	$('#custom-styling').empty()
+	$('body').removeAttr('class').addClass('custom');
+	$( ".custom-picker" ).each(function() {
+		$('#custom-styling').append('body.custom{--' + $(this).attr('data-var-key') + ': ' + $(this).val() + '!important}')
+	})
+	
+})
 function customPickerStyling() {
 	let customStyle = '<style>body.custom{';
 	
@@ -52,31 +59,68 @@ function changeHandler({
     URL.revokeObjectURL(urlObj);
   });
 
-  // Set the src and start loading the audio from the file
-  audio.src = urlObj;
-  
-  rateListener();
-  pitchListener();
-  addAudio();
+  loadWaveSurfer(urlObj);
 }
 
-function pitchListener() {
-	const pitch = document.querySelector("#pitch");
-
-	pitch.addEventListener("change", () => {
-	  if ("preservesPitch" in audio) {
-	    audio.preservesPitch = pitch.checked;
-	  } else if ("mozPreservesPitch" in audio) {
-	    audio.mozPreservesPitch = pitch.checked; // deprecated
-	  }
-	});
+function checkBufferSize() {
+	let bufferSize = $('#buffer-growth').val();
+	bufferSize = parseFloat(bufferSize);
+	bufferSize = bufferSize.toFixed(2);
+	bufferSize = parseFloat(bufferSize);
+	return bufferSize;
 }
-
-function rateListener() {
-	rate.addEventListener("input", () => (audio.playbackRate = rate.value));
+function decreaseBufferSize() {
+	let bufferSize = checkBufferSize();
+	bufferSize = bufferSize - 0.01;
+	bufferSize = bufferSize.toFixed(2);
+	bufferSize = parseFloat(bufferSize);
+	$('#buffer-growth').val(bufferSize);
+	buffer = bufferSize;
 }
-
+function increaseBufferSize() {
+	let bufferSize = checkBufferSize();
+	bufferSize = bufferSize + 0.01;
+	bufferSize = bufferSize.toFixed(2);
+	bufferSize = parseFloat(bufferSize);
+	$('#buffer-growth').val(bufferSize);
+	buffer = bufferSize;
+}
+function commonRate() {
+	let rate = $('#rate-growth').val();
+	rate = parseFloat(rate);
+	rate = rate.toFixed(2);
+	rate = parseFloat(rate);
+	return rate;
+}
+function decreaseRate() {
+	let rate = commonRate();
+	rate = rate - 0.01;
+	rate = rate.toFixed(2);
+	rate = parseFloat(rate);
+	$('#rate-growth').val(rate);
+}
+function increaseRate() {
+	let rate = commonRate();
+	rate = rate + 0.01;
+	rate = rate.toFixed(2);
+	rate = parseFloat(rate);
+	$('#rate-growth').val(rate);
+}
+function decreaseRateTime() {
+	let rate = $('#seconds-growth').val() * 1;
+	if (rate === 1) {
+		return;
+	}
+	rate = rate - 1;
+	$('#seconds-growth').val(rate);
+}
+function increaseRateTime() {
+	let rate = $('#seconds-growth').val() * 1;
+	rate = rate + 1;
+	$('#seconds-growth').val(rate);
+}
 function startAutoRate() {
+	stopAutoRate()
 	$('#start-auto-rate').prop('disabled', true);
 	$('#stop-auto-rate').prop('disabled', false);
 	
@@ -89,69 +133,66 @@ function startAutoRate() {
 	  	currentRate = Math.round( (parseFloat(currentRate) + parseFloat($('#rate-growth').val())) * 100) / 100
 	  	$('#rate').val(currentRate);
 	  	setCurrentPitchValue();
-	  	audio.playbackRate = $('#rate').val();
+	  	wavesurfer.setPlaybackRate($('#rate').val(), pitchValue);
 	}
 }
 
-function setVolumeValue() {
-	audio.volume = $('#volume').val();
-}
-
-function addAudio() {
-	rateListener();
-	pitchListener();
-	document.querySelector("#audio-player-container").append(audio);
-	$('#info-choose-song').hide();
-}
-$('#loop').click(function() {
-	if ($(this).prop('checked')) {
-		$('.loop-setting').show();
-	}
-	else {
-		$('.loop-setting').hide();
-		loopFull.checked = false;
-		loopPartially.checked = false;
-		$('.loop-setting-partially').hide();
-
-		if (typeof loopInterval == 'undefined') {
-		    return;
-		}
-		clearInterval(loopInterval);
-	}
-});
 $(loopFull).click(function() {
-	toggleLoopFull();
-	$('.loop-setting-partially').hide();
-
-	if (typeof loopInterval == 'undefined') {
-	    return;
-	}
-	clearInterval(loopInterval);
+	$('#loop-action').prop('disabled', false);
+	toggleLoop();
+	disablePartially();
 })
 $(loopPartially).click(function() {
-	$('.loop-setting-partially').show();
-	toggleLoopFull();
+	$('#loop-action').prop('disabled', true);
+	toggleLoop();
+	enablePartially();
 })
-
-$('#loop-partially-action').click(function() {
-	enableLoopPartially();
-})
-function toggleLoopFull() {
-	audio.loop = loopFull.checked;
+function enablePartially() {
+	$('#loop-start').removeAttr('disabled')
+	$('#loop-end').removeAttr('disabled')
 }
-function enableLoopPartially() {
-	loopInterval = setInterval(checkLoop, 300);
-	loopStartTimestamp = $(loopStart).val();
-	loopEndTimestamp = $(loopEnd).val();
+function disablePartially() {
+	$('#loop-start').attr('disabled', true)
+	$('#loop-end').attr('disabled', true)
+}
 
-	function checkLoop() {
-		if (audio.currentTime >= loopEndTimestamp) {
-			audio.pause();
-
-			audio.currentTime = loopStartTimestamp;
-			audio.play()
-		}
+$('#loop-action').click(function() {
+	loopStatus = true;
+	toggleLoop($('input[name="loop"]:checked').val());
+})
+let loopStatus = false;
+function toggleLoop(type) {
+	if (typeof(type) == "undefined") {
+		loopStatus = false;
+		$('#loop-action').text("Start Loop")
+		return;
 	}
+
+	let duration = wavesurfer.getDuration().toFixed(2);
+
+	if (type == "full") {
+		loopStartTimestamp = 0;
+		loopEndTimestamp = duration;
+	}
+	else if (type == "partially") {
+		loopStartTimestamp = $(loopStart).val();
+		loopEndTimestamp = $(loopEnd).val();
+	}
+
+	$('#loop-action').text("Looping")
+
+	let sec = loopStartTimestamp / duration;
+
+	wavesurfer.on("timeupdate", (currentTime) => {
+		if (!loopStatus) {
+			return;
+		}
+
+	  if(currentTime > loopEndTimestamp - buffer){
+	      currentTime = loopStartTimestamp;
+	      wavesurfer.seekTo(sec);
+	  }
+	})
 }
 
 document.getElementById("loop-start").addEventListener("input", enablePartiallyButton);
@@ -160,11 +201,11 @@ function enablePartiallyButton() {
 	let loopStart = $('#loop-start').val();
 	let loopEnd = $('#loop-end').val();
 
-	if (loopStart != undefined && loopStart > 0 && loopEnd != undefined && loopEnd > 0) {
-		$('#loop-partially-action').prop('disabled', false);
+	if (loopStart != undefined && loopStart > 0 && loopEnd != undefined && loopEnd > 0 && loopEnd != loopStart) {
+		$('#loop-action').prop('disabled', false);
 	}
 	else {
-		$('#loop-partially-action').prop('disabled', true);
+		$('#loop-action').prop('disabled', true);
 	}
 }
 
@@ -177,7 +218,7 @@ function stopAutoRate() {
 function rateReset() {
 	$('#rate').val(1);
 	currentRate = $('#rate').val();
-	audio.playbackRate = $('#rate').val();
+	wavesurfer.setPlaybackRate($('#rate').val(), pitchValue);
 	setCurrentPitchValue();
 }
 
@@ -189,7 +230,7 @@ function enableAuto() {
 	let rateGrowth = $('#rate-growth').val();
 	let secondsGrowth = $('#seconds-growth').val();
 
-	if (rateGrowth != undefined && rateGrowth > 0 && secondsGrowth != undefined && secondsGrowth > 0) {
+	if (rateGrowth != undefined && secondsGrowth != undefined && secondsGrowth > 0) {
 		$('#start-auto-rate').prop('disabled', false);
 	}
 	else {
@@ -203,6 +244,12 @@ document.getElementById("seconds-growth").addEventListener("input", enableAuto);
 
 $('#rate').on('input', function() {
 	setCurrentPitchValue();
+	pitchValue = document.getElementById('pitch').checked;
+	wavesurfer.setPlaybackRate(rate.value, pitchValue)
+})
+$('#pitch').on('input', function() {
+	pitchValue = document.getElementById('pitch').checked;
+	wavesurfer.setPlaybackRate(rate.value, pitchValue)
 })
 
 $('#volume').on('input', function() {
@@ -210,19 +257,43 @@ $('#volume').on('input', function() {
 })
 
 $('.track').click(function() {
+	let trackName = $(this).attr('data-track-file');
+	trackName = `music/${trackName}.mp3`;
+	loadWaveSurfer(trackName);
+
 	$('.track.menu-item').removeClass('selected')
 	$(this).addClass('selected');
-	let trackName = $(this).attr('data-track-name');
-	trackName = `music/${trackName}.mp3`;
-	audio.src = trackName;
-	addAudio();
+
+	$('.track').removeClass('playing');
+	$('.track.loop').attr('src', 'img/vdisk1.png');
+	$('.track.instrumental').attr('src', 'img/vdisk2.png');
+	$(this).addClass('playing');
+	$(this).attr('src', 'img/vdisk4.png');
+
+	let title = $(this).attr('data-track-title') ? $(this).attr('data-track-title') : "Loop";
+	let artist = $(this).attr('data-track-artist') ? $(this).attr('data-track-artist') : "No Artist";
+	$('#track-title').text(title);
+	$('#track-artist').text(artist);
 });
 
 $('.menu-item').click(function() {
 	let containerToShow = $(this).attr('data-click-action');
-	$(`#${containerToShow}`).toggle();
+	toggleVisibility($(`#${containerToShow}`));
 	$(this).toggleClass('selected');
 });
+function toggleVisibility(e) {
+	let display;
+	if($(e).css("opacity") == "0") {
+		$(e).css("opacity", 1);
+		$(e).css("display", "block");
+	}
+	else {
+		$(e).css("opacity", 0);
+		setTimeout(() => {
+		  $(e).css("display", "none")
+		}, 300);
+	}
+}
 
 $('.theme-color').click(function() {
 	removeCustomStyles();

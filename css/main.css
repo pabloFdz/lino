@@ -56,22 +56,21 @@ body.gray {
   --main-border-hover: #2C2A2A;
 }
 body.purple {
-  --background: linear-gradient(90deg, rgba(93,0,156,1) 0%, rgba(192,88,245,1) 100%);
-  --text-color: #fff;
-
-  --main-background: #9806FB;
-  --main-border: #37005D;
-
-  --main-background-hover: #37005D;
-  --main-border-hover: #0A0011;
+  --background: #271948;
+  --text-color: #f9f5ff;
+  --main-background: #3e2c59;
+  --main-border: #18101e;
+  --main-background-hover: #916996;
+  --main-border-hover: #c4a5e3;
 }
 
 /* STYLES */
-body {background: var(--background); overflow-x: hidden; color: var(--text-color); font-family: 'Open Sans'; margin: 0 auto; max-width: 1160px; font-size: 90%}
+canvas{width: 100%; height: 400px}
+body {background: var(--background); overflow-x: hidden; color: var(--text-color); font-family: 'Open Sans'; margin: 0 auto; max-width: 1160px; font-size: 90%;}
 
 .small-devices {display: none}
 
-button {margin: 10px 0; color: var(--text-color); background: var(--main-background); border: none; padding: 10px; border-radius: 4px; border-bottom: 4px solid var(--main-border); transition: all .2s ease; outline: none; text-transform: uppercase; font-weight: 700}
+.styled, button {margin: 10px 0; color: var(--text-color); background: var(--main-background); border: none; padding: 10px; border-radius: 4px; border-bottom: 4px solid var(--main-border); transition: all .2s ease; outline: none; text-transform: uppercase; font-weight: 700}
 button:hover {background: var(--main-background-hover); border-color: var(--main-border-hover); transition: all .2s ease; cursor: pointer}
 button:active {border: 0; transition: all .2s ease}
 button:disabled {opacity: 0.5; background: var(--main-background-disabled); border-color: var(--main-border-disabled)}
@@ -80,21 +79,25 @@ input[type="checkbox"] {accent-color: var(--main-background-hover)}
 
 audio {width: 100%}
 .loop-setting-main {margin-bottom: 10px}
-.loop-setting {display: none; margin-bottom: 10px}
-.loop-setting-partially {display: none}
-input[type=number].loop-setting-partially {width: 15%; text-align: center; font-size: 85%}
+.loop-setting {margin-bottom: 10px;}
+input[type=number].loop-setting-partially {width: 3em; text-align: center; font-size: 85%}
 
-#menu {width: 100%; padding: 5% 0; background: var(--main-background-hover)}
-img.menu-item {width: calc(((100% - 80px) - 16%) / 8); margin-left: 10px; background: var(--main-background); border-radius: 10px; padding: 2%; box-sizing: border-box; cursor: pointer}
+#menu {width: 100%; padding: 2% 0; background: var(--main-background-hover)}
+#menu img.menu-item {border-bottom: 4px solid var(--main-border)}
+img.menu-item {width: 10%; max-width: 60px; margin-left: 10px; background: var(--main-background); border-radius: 10px; padding: 2%; box-sizing: border-box; cursor: pointer}
 .menu-item.selected {background: var(--main-border-hover); opacity: 0.5}
 
 .custom button {margin-bottom: 10px}
 .custom #custom-settings {display: none}
-.custom .custom-setting {margin-bottom: 10px; text-align: left; margin-left: 50%; transform: translateX(-50%); padding-left: 5%}
-
-.playlist-item {margin-bottom: 10px}
-.playlist-item img.menu-item {margin-right: 10px; vertical-align: middle}
-.playlist-item label {text-transform: capitalize;}
+.custom .custom-setting {margin-bottom: 10px; text-align: left; width: 65%; margin-left: 50%; transform: translateX(-50%); padding-left: 5%}
+.custom-setting input {float: right;}
+.playlist-title {width: 100%; margin-top: 0; margin-bottom: 2em; text-align: center;}
+.playlist-items-container {display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%;}
+.playlist-item {display: inline-block; width: 25%; box-sizing: border-box; margin-bottom: 10px}
+.playlist-item * {display: block;}
+.playlist-item img {margin-right: 10px; vertical-align: middle; width: 80%; padding: 10px; margin: 0 auto;}
+.playlist-item label {width: fit-content; text-align: center; font-size: 80%; text-transform: capitalize; padding: 10px; margin: 0 auto;}
+.playlist-item:first-of-type label {white-space: nowrap;}
 
 .theme-selector {margin-bottom: 10px}
 .theme-color {display: inline-block; width: 15%; max-width: 50px; height: 30px; border-radius: 4px}
@@ -106,13 +109,43 @@ img.menu-item {width: calc(((100% - 80px) - 16%) / 8); margin-left: 10px; backgr
 #theme .custom {margin-top: 20px}
 
 .center {margin: 0 auto; text-align: center}
+.conf-element {transition: height 0ms 1000ms, opacity 400ms 0ms}
 .conf-element {background-color: rgba(255, 255, 255, 0.2); width: 90%; margin: 0 auto 2%; padding: 5%}
 .conf-element .growth {margin-bottom: 10px}
-.growth input[type=number] {width: 25%; text-align: center; font-size: 85%}
+.growth input[type=number] {width: 3em; height: 2em; text-align: center; font-size: 85%}
+.growth .rate-settings button {width: 3em;}
 .info-text {font-style: italic; font-size: 80%}
-.rate-settings-container {display: inline-block; width: 45%}
+.rate-settings-container {display: inline-block; width: 49%}
 .rate-settings {margin: 0 5%}
+.rate-settings button, .rate-settings input {display: inline;}
+#buffer-growth{width: 3em; height: 2em; text-align: center; font-size: 85%;}
+#buffer p {margin-top: 0;}
 
+.track-container {background: var(--box-shadow-color); border-bottom: 4px solid var(--main-border); border-radius: 10px; width: 60%; margin: 0 auto; padding: 0.2em;}
+.track-container img {background: transparent; margin: 0 auto; padding: 2% 0;}
+.track-container img.playing {width: 80%; -webkit-animation:spin 10s linear infinite; -moz-animation:spin 10s linear infinite; animation:spin 10s linear infinite; filter: invert(58%) sepia(18%) saturate(6794%) hue-rotate(157deg) brightness(88%) contrast(102%);}
+@-moz-keyframes spin { 
+    100% {
+      -moz-transform: rotate(360deg);
+    } 
+}
+@-webkit-keyframes spin { 
+    100% {
+      -webkit-transform: rotate(360deg);
+    } 
+}
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
+
+#waveform {position: relative;}
+.please-track {width: 100%; height: 100%; position: absolute; top: 0; left: 0;}
+.please-track p {position: absolute; z-index: 10; top: 50%; left: 50%; transform: translate(-50%, -100%); margin: 0; padding: 0; font-size: 160%;}
+.please-track-opacity {width: 100%; height: 100%; position: absolute; top: 0; background: var(--main-background); opacity: 0.8;}
+.playlist-separator {text-align: center; border-top: 1px solid var(--main-border); margin: 3% 25% 0;}
 /* FILE */
 .file-upload {
   background-color: rgba(255, 255, 255, 0.4);
@@ -120,7 +153,7 @@ img.menu-item {width: calc(((100% - 80px) - 16%) / 8); margin-left: 10px; backgr
   margin: 0 auto;
   padding: 5%;
 }
-.file-upload-btn {width: 100%}
+.file-upload-btn {display: block; width: 40%; margin: 40px auto 0;}
 .file-upload-content {
   display: none;
   text-align: center;
@@ -264,11 +297,114 @@ input[type=range]:focus::-ms-fill-upper {
 @media (max-width: 300px) {
   .small-devices {display: inherit}
 }
+@media (max-width: 400px) {
+  .growth input[type=number] {width: 2em}
+  .growth .rate-settings button {width: 1.75em}
+}
 @media (min-width: 680px) {
   body {font-size: 110%}
   .conf-element {padding: 3% 5%}
   input[type=number].loop-setting-partially {width: 5%}
+  .playlist-item {width: 15%;}
 }
-@media (min-width: 1160px) {
-  img.menu-item {max-height: 80px}
+@media (min-width: 1000px) {
+  img.menu-item {max-width: 75px}
+}
+
+
+
+
+
+/* Main styles */
+:root {
+  --primary-color: rgb(24, 24, 24);
+  --primary-background-color: rgb(221, 221, 221);
+  --secondary-color: rgb(75, 75, 75);
+  --secondary-background-color: rgb(255, 255, 255);
+  --highlight-color: rgb(255, 85, 1);
+  --box-shadow-color: rgb(201, 201, 201);
+  --disabled-button-color: rgb(175, 175, 175);
+  --border-radius: 1rem;
+}
+
+/* Main Container */
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-background-color);
+  padding: 1rem;
+}
+/* Audio player */
+.audio-player {
+  width: 100%;
+  /*max-width: 100rem;*/
+  display: flex;
+  margin: 2rem 1rem;
+  /*background-color: var(--secondary-background-color);*/
+}
+/* Play button */
+.controls-play {
+  padding: 1rem 0;
+}
+.play-button {  
+  /* Reset default button styles */
+  height: 20%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+/* Main player body, which includes title, waveform, volume and timecode */
+.player-body {
+  width: 100%;
+  padding: 1rem;
+}
+/* Audio track title */
+.title {
+  width: 100%;
+  font-weight: 600;
+}
+/* Main waveform */
+.waveform {
+  width: 100%;
+  min-height: 8rem;
+  padding: 0.5rem 0;
+}
+wave:not(wave>wave){
+  border-radius: var(--border-radius);
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.1rem var(--box-shadow-color);
+}
+wave>wave {
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.1rem var(--box-shadow-color);
+}
+/* Controls include volume mute/unmute, volume slider and timecode */
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+/* Volume */
+.volume {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.volume-icon {
+  cursor: pointer;
+  margin-right: 15px;
+  width: 1.75em;
+}
+.volume-slider {
+  margin: 0 1rem;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+.cursor {
+ border-right: 2px solid;
 }
