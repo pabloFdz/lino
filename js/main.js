@@ -7,12 +7,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/preservesPitch
 let rateGrowthInterval;
 let currentRate = $('#rate').val();
 
-let loopStart = document.querySelector("#loop-start");
-let loopEnd = document.querySelector("#loop-end");
-let loopStartTimestamp;
-let loopEndTimestamp;
+//let loopStart = document.querySelector("#loop-start");
+//let loopEnd = document.querySelector("#loop-end");
+//let loopStartTimestamp;
+//let loopEndTimestamp;
 
-let buffer = .1;
+//let buffer = .1;
 
 let pitchValue = true;
 
@@ -62,29 +62,6 @@ function changeHandler({
   loadWaveSurfer(urlObj);
 }
 
-function checkBufferSize() {
-	let bufferSize = $('#buffer-growth').val();
-	bufferSize = parseFloat(bufferSize);
-	bufferSize = bufferSize.toFixed(2);
-	bufferSize = parseFloat(bufferSize);
-	return bufferSize;
-}
-function decreaseBufferSize() {
-	let bufferSize = checkBufferSize();
-	bufferSize = bufferSize - 0.01;
-	bufferSize = bufferSize.toFixed(2);
-	bufferSize = parseFloat(bufferSize);
-	$('#buffer-growth').val(bufferSize);
-	buffer = bufferSize;
-}
-function increaseBufferSize() {
-	let bufferSize = checkBufferSize();
-	bufferSize = bufferSize + 0.01;
-	bufferSize = bufferSize.toFixed(2);
-	bufferSize = parseFloat(bufferSize);
-	$('#buffer-growth').val(bufferSize);
-	buffer = bufferSize;
-}
 function commonRate() {
 	let rate = $('#rate-growth').val();
 	rate = parseFloat(rate);
@@ -137,78 +114,6 @@ function startAutoRate() {
 	}
 }
 
-$(loopFull).click(function() {
-	$('#loop-action').prop('disabled', false);
-	toggleLoop();
-	disablePartially();
-})
-$(loopPartially).click(function() {
-	$('#loop-action').prop('disabled', true);
-	toggleLoop();
-	enablePartially();
-})
-function enablePartially() {
-	$('#loop-start').removeAttr('disabled')
-	$('#loop-end').removeAttr('disabled')
-}
-function disablePartially() {
-	$('#loop-start').attr('disabled', true)
-	$('#loop-end').attr('disabled', true)
-}
-
-$('#loop-action').click(function() {
-	loopStatus = true;
-	toggleLoop($('input[name="loop"]:checked').val());
-})
-let loopStatus = false;
-function toggleLoop(type) {
-	if (typeof(type) == "undefined") {
-		loopStatus = false;
-		$('#loop-action').text("Start Loop")
-		return;
-	}
-
-	let duration = wavesurfer.getDuration().toFixed(2);
-
-	if (type == "full") {
-		loopStartTimestamp = 0;
-		loopEndTimestamp = duration;
-	}
-	else if (type == "partially") {
-		loopStartTimestamp = $(loopStart).val();
-		loopEndTimestamp = $(loopEnd).val();
-	}
-
-	$('#loop-action').text("Looping")
-
-	let sec = loopStartTimestamp / duration;
-
-	wavesurfer.on("timeupdate", (currentTime) => {
-		if (!loopStatus) {
-			return;
-		}
-
-	  if(currentTime > loopEndTimestamp - buffer){
-	      currentTime = loopStartTimestamp;
-	      wavesurfer.seekTo(sec);
-	  }
-	})
-}
-
-document.getElementById("loop-start").addEventListener("input", enablePartiallyButton);
-document.getElementById("loop-end").addEventListener("input", enablePartiallyButton);
-function enablePartiallyButton() {
-	let loopStart = $('#loop-start').val();
-	let loopEnd = $('#loop-end').val();
-
-	if (loopStart != undefined && loopStart > 0 && loopEnd != undefined && loopEnd > 0 && loopEnd != loopStart) {
-		$('#loop-action').prop('disabled', false);
-	}
-	else {
-		$('#loop-action').prop('disabled', true);
-	}
-}
-
 function stopAutoRate() {
 	clearInterval(rateGrowthInterval);
 	enableAuto();
@@ -257,6 +162,9 @@ $('#volume').on('input', function() {
 })
 
 $('.track').click(function() {
+	//$('#waveform2 wave canvas:not(:first)').remove();
+	//$('#waveform2 region').remove();
+	
 	let trackName = $(this).attr('data-track-file');
 	trackName = `music/${trackName}.mp3`;
 	loadWaveSurfer(trackName);
@@ -264,11 +172,10 @@ $('.track').click(function() {
 	$('.track.menu-item').removeClass('selected')
 	$(this).addClass('selected');
 
-	$('.track').removeClass('playing');
-	$('.track.loop').attr('src', 'img/vdisk1.png');
-	$('.track.instrumental').attr('src', 'img/vdisk2.png');
-	$(this).addClass('playing');
-	$(this).attr('src', 'img/vdisk4.png');
+	$('.track-container').removeClass('playing');
+	$('.track').attr('src', 'img/play.svg');
+	$(this).parent().addClass('playing');
+	$(this).attr('src', 'img/vynil.gif');
 
 	let title = $(this).attr('data-track-title') ? $(this).attr('data-track-title') : "Loop";
 	let artist = $(this).attr('data-track-artist') ? $(this).attr('data-track-artist') : "No Artist";

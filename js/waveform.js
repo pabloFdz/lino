@@ -19,6 +19,9 @@ const initializeWavesurfer = () => {
     progressColor: "rgba(255, 255, 232, 0.4)",
     cursorWidth: 3,
     cursorColor: "rgba(255, 255, 255, 0.4)",
+    partialRender: true,
+    // backend: 'MediaElement',
+    // renderer: 'MultiCanvas',
   })
 }
 // --------------------------------------------------------- //
@@ -105,13 +108,15 @@ wavesurfer.on("ready", () => {
 
   $('.please-track').hide();
 
-//pablo
-len = wavesurfer.getDuration() - 0.01
-wavesurfer.addRegion({ start: 0, end: len, loop: true });
+  //pablo
 
+  len = wavesurfer.getDuration() - 0.01;
+  wavesurfer.addRegion({ start: 0, end: len, loop: true });
 
-  $('#loop-full').click();
-  //$('#loop-action').click();
+  if (Object.keys(wavesurfer.regions.list).length > 1) {
+    let name = Object.keys(wavesurfer.regions.list)[0];
+    wavesurfer.regions.list[name].remove();
+  }
 })
 // Sets the timecode current timestamp as audio plays
 wavesurfer.on("audioprocess", () => {
