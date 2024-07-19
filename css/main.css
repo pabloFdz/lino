@@ -621,7 +621,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 @media (max-width: 431px) {
     .playlist-item {
-        width: 8em
+        width: 25%;
     }
 }
 
