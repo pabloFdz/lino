@@ -105,8 +105,13 @@ wavesurfer.on("ready", () => {
 
   $('.please-track').hide();
 
+//pablo
+len = wavesurfer.getDuration() - 0.01
+wavesurfer.addRegion({ start: 0, end: len, loop: true });
+
+
   $('#loop-full').click();
-  $('#loop-action').click();
+  //$('#loop-action').click();
 })
 // Sets the timecode current timestamp as audio plays
 wavesurfer.on("audioprocess", () => {
