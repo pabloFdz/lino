@@ -591,6 +591,11 @@ input[type=range]:focus::-ms-fill-upper {
     background: var(--main-background);
 }
 
+#volumeSlider {
+  margin: 0 !important;
+  width: 80%;
+}
+
 @media (max-width: 300px) {
     .small-devices {
         display: inherit
@@ -622,6 +627,9 @@ input[type=range]:focus::-ms-fill-upper {
 @media (max-width: 431px) {
     .playlist-item {
         width: 32%;
+    }
+    #volume-button {
+      padding: 0;
     }
 }
 
