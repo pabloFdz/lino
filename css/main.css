@@ -607,6 +607,24 @@ input[type=range]:focus::-ms-fill-upper {
     }
 }
 
+@media (max-width: 480px) {
+    .playlist-item {
+        width: 9em
+    }
+    .playlist-item img {
+      padding: 15%;
+    }
+    .track-container {
+      border-radius: 6px;
+    }
+}
+
+@media (max-width: 431px) {
+    .playlist-item {
+        width: 8em
+    }
+}
+
 @media (min-width: 680px) {
     body {
         font-size: 110%
