@@ -20,7 +20,7 @@ const initializeWavesurfer = () => {
     cursorWidth: 3,
     cursorColor: "rgba(255, 255, 255, 0.4)",
     partialRender: true,
-    backend: 'MediaElement',
+    //backend: 'MediaElement',
     //renderer: 'MultiCanvas',
   })
 }

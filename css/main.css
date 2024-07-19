@@ -704,7 +704,9 @@ input[type=range]:focus::-ms-fill-upper {
     width: 100%;
     padding: 1rem;
 }
-
+.timecode {
+  text-align: right;
+}
 /* Audio track title */
 .title {
     width: 100%;

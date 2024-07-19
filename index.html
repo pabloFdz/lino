@@ -202,40 +202,38 @@
 		</div>
 		<div class="audio-player">
 	        <div class="player-body">
-	          <p class="title"><span id="track-artist">Artist</span> - <span id="track-title">Track Title</span></p>
-	          <div id="waveform2" class="waveform"></div>
-
-	          <div class="center" style="margin-top: -2em;">
-		          <img id="zoomout" class="zoom" src="img/zoom_out.svg">
-		          <input id="slider" data-action="zoom" type="range" min="20" max="1000" value="0" style="width: 80%">
-		          <img id="zoomin" class="zoom" src="img/zoom_in.svg">
-		      </div>
-
+				<p class="title"><span id="track-artist">Artist</span> - <span id="track-title">Track Title</span></p>
+				<div id="waveform2" class="waveform"></div>
 	          
-	          <div class="controls">
+				<div class="controls" style="margin-top: -4em;">
 	          		<div id="controls-play" class="controls">
 	          	        <button id="playButton" class="play-button">
 	          	          <img id="playButtonIcon" class="play-button-icon" src="img/play_white.svg" width="20px" />
 	          	        </button>
 	          	    </div>
-	          	<div class="controls">
-	          		<button id="volume-button">
-						<img id="volumeIcon" class="volume-icon" src="img/volume_white.svg" alt="Volume" />
-	          		</button>
+		          	<div class="controls">
+		          		<button id="volume-button">
+							<img id="volumeIcon" class="volume-icon" src="img/volume_white.svg" alt="Volume" />
+		          		</button>
+		          	  <input id="volumeSlider" class="volume-slider" type="range" name="volume-slider" min="0" max="100" value="50" />
+		          	</div>
+		            <div class="timecode">
+						<span id="currentTime">00:00:00</span>
+						<span>/</span>
+						<span id="totalDuration">00:00:00</span>
+		            </div>
+          		</div>
 
-	          	  <input id="volumeSlider" class="volume-slider" type="range" name="volume-slider" min="0" max="100" value="50" />
-	          	</div>
-	            <div class="timecode">
-	              <span id="currentTime">00:00:00</span>
-	              <span>/</span>
-	              <span id="totalDuration">00:00:00</span>
-	            </div>
-	          </div>
+				<div class="center">
+					<img id="zoomout" class="zoom" src="img/zoom_out.svg">
+					<input id="slider" data-action="zoom" type="range" min="20" max="1000" value="0" style="width: 80%">
+					<img id="zoomin" class="zoom" src="img/zoom_in.svg">
+				</div>
 	        </div>
       	</div>
 	</div>
 	<script type="text/javascript">
-		zoom = 3;
+		zoom = 0.;
 		document.getElementById("zoomin").onclick = () => {
 		  zoom = ++zoom;
 		  console.log(zoom)
@@ -243,7 +241,7 @@
 		};
 
 		document.getElementById("zoomout").onclick = () => {
-		  if (zoom === 3) {
+		  if (zoom === 0) {
 		  	return;
 		  }
 		  zoom = --zoom;
