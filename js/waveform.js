@@ -108,10 +108,12 @@ wavesurfer.on("ready", () => {
 
   $('.please-track').hide();
 
-  //pablo
-
   len = wavesurfer.getDuration() - 0.01;
-  wavesurfer.addRegion({ start: 0, end: len, loop: true });
+  wavesurfer.addRegion({
+    start: 0,
+    end: len,
+    loop: true
+  });
 
   if (Object.keys(wavesurfer.regions.list).length > 1) {
     let name = Object.keys(wavesurfer.regions.list)[0];

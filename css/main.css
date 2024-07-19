@@ -12,8 +12,8 @@
     --main-background-disabled: #859498;
     --main-border-disabled: #646a6b;
 
-
     user-select: none;
+    -webkit-user-select: none;
 }
 
 /* SKINS */
@@ -497,6 +497,7 @@ input[type=range] {
     margin: 0 auto;
     width: 50%;
     background: transparent;
+    vertical-align: middle;
 }
 
 input[type=range]:focus {
@@ -683,10 +684,7 @@ input[type=range]:focus::-ms-fill-upper {
 /* Audio player */
 .audio-player {
     width: 100%;
-    /*max-width: 100rem;*/
     display: flex;
-    margin: 2rem 1rem;
-    /*background-color: var(--secondary-background-color);*/
 }
 
 /* Play button */
@@ -762,7 +760,7 @@ handle::after {
 
 .zoom {
     width: 1.3em;
-    margin: 0 1em;
+    vertical-align: middle
 }
 
 /* Volume */
