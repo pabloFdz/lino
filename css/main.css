@@ -11,6 +11,9 @@
     --color-purple-main-border: #37005D;
     --main-background-disabled: #859498;
     --main-border-disabled: #646a6b;
+
+
+    user-select: none;
 }
 
 /* SKINS */
