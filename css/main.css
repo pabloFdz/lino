@@ -732,7 +732,8 @@ handle::after {
 }
 
 .zoom {
-    width: 1em;
+    width: 1.3em;
+    margin: 0 1em;
 }
 
 /* Volume */
