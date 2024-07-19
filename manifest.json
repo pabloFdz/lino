@@ -1,25 +1,19 @@
 {
-  "name": "Lino Scratch Trainer",
-  "short_name": "Lino",
-  "background_color": "#2F0548",
-  "description": "Scratch trainer to loop and upspeed loops and your own instrumentals",
-  "display": "standalone",
-  "theme_color": "#1c0030",
-  "background_color": "#7C6A6A"
-  "lang": "en",
+  "name": "Lino",
+  "short_name": "Lino Scratch Trainer",
   "start_url": "https://pablofdz.github.io/lino/",
   "icons": [
     {
-      "src": "icons/android/android-launchericon-192-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
       "src": "icons/lino-512.png",
-      "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "theme_color": "#8b949a",
+  "background_color": "#1f232a",
+  "short_name": "LED Sign",
+  "id": "salmonjump_led",
+  "description": "The best LED Sign",
+  "display": "standalone",
+  "orientation": "portrait"
 }
