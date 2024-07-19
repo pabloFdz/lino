@@ -211,14 +211,19 @@
 		      </div>
 
 	          <script type="text/javascript">
-	          	zoom=100;
+	          	zoom=3;
 	          	document.getElementById("zoomin").onclick = () => {
-	          	  zoom = zoom * 2;
+	          	  zoom = ++zoom;
+	          	  console.log(zoom)
 	          	  wavesurfer.zoom(zoom);
 	          	};
 
 	          	document.getElementById("zoomout").onclick = () => {
-	          	  zoom = zoom / 2;
+	          	  if (zoom === 3) {
+	          	  	return;
+	          	  }
+	          	  zoom = --zoom;
+	          	  console.log(zoom)
 	          	  wavesurfer.zoom(zoom);
 	          	};
 	          </script>
@@ -232,6 +237,7 @@
 	          		<button id="volume-button">
 						<img id="volumeIcon" class="volume-icon" src="img/volume_white.svg" alt="Volume" />
 	          		</button>
+
 	          	  <input id="volumeSlider" class="volume-slider" type="range" name="volume-slider" min="0" max="100" value="50" />
 	          	</div>
 	            <div class="timecode">
