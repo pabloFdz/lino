@@ -11,8 +11,8 @@
   ],
   "theme_color": "#8b949a",
   "background_color": "#1f232a",
-  "short_name": "LED Sign",
-  "id": "salmonjump_led",
+  "short_name": "Lino",
+  "id": "salmonjump_lino",
   "description": "The best LED Sign",
   "display": "standalone",
   "orientation": "portrait"
