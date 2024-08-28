@@ -1,7 +1,7 @@
 {
   "name": "Lino Scratch Trainer",
   "short_name": "Lino ST",
-  "start_url": "https://pablofdz.github.io/lino/",
+  "start_url": "/",
   "icons": [
     {
       "src": "icons/lino-512.png",
