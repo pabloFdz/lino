@@ -10,12 +10,17 @@
 
 	<script class="jsbin" src="js/lib/jquery.min.js"></script>
 	<script type="text/javascript" src="js/local_storage.js"></script>
-	<script type="text/javascript" src="js/serviceworker.js"></script>
 
 	<script src="js/lib/wavesurfer-v1.2.3.min.js"></script>
 	<script src="js/lib/wavesurfer.regions-v1.2.3.min.js"></script>
 </head>
 <body class="black">
+	<script>
+		if (typeof navigator.serviceWorker !== 'undefined') {
+			navigator.serviceWorker.register('serviceworker.js')
+		}
+	</script>
+
 	<style id="custom-styling"></style>
 	<div id="menu" class="conf-element">
 		<div class="setting-container center">
