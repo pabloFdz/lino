@@ -4,14 +4,13 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "icons/lino-512.png",
+      "src": "icons/lino_purple-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "theme_color": "#8b949a",
   "background_color": "#1f232a",
-  "short_name": "Lino",
   "id": "salmonjump_lino",
   "description": "The best DJ Scratch Trainer",
   "display": "standalone",
