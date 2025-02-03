@@ -176,11 +176,9 @@ $('.track').click(function() {
 	let playingTrack = $('.track-container.playing');
 	let playingTrackImage = $('.track-container.playing img');
 
-	$(playingTrackImage).attr('src', "img/fa/" + $(playingTrackImage).attr('data-track-icon') + ".svg");
+	$(playingTrackImage).attr('src', "img/" + $(playingTrackImage).attr('data-track-icon') + ".svg");
 	$(playingTrack).removeClass('playing');
 
-	// $('.track-container').removeClass('playing');
-	// $('.track').attr('src', 'img/play.svg');
 	$(this).parent().addClass('playing');
 	$(this).attr('src', 'img/vynil.gif');
 

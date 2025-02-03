@@ -33,9 +33,9 @@ const togglePlay = () => {
   wavesurfer.playPause()
   const isPlaying = wavesurfer.isPlaying()
   if (isPlaying) {
-    playButtonIcon.src = "img/fa/pausecircle.svg"
+    playButtonIcon.src = "img/pausecircle.svg"
   } else {
-    playButtonIcon.src = "img/fa/playcircle.svg"
+    playButtonIcon.src = "img/playcircle.svg"
     stopAutoRate()
   }
 }
@@ -83,13 +83,13 @@ const changeVolumeIcon = (volume) => {
     volume = volumeSlider.value / 100;
   }
   if (volume === 0 || volume === true) {
-    volumeIcon.src = "img/fa/mute.svg"
+    volumeIcon.src = "img/mute.svg"
   }
   else if (volume > 0.5) {
-    volumeIcon.src = "img/fa/volume.svg"
+    volumeIcon.src = "img/volume.svg"
   }
   else if (volume < 0.5) {
-    volumeIcon.src = "img/fa/volumemid.svg"
+    volumeIcon.src = "img/volumemid.svg"
   }
 }
 // --------------------------------------------------------- //
