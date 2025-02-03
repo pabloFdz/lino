@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.salmonjump.lino",
       "sha256_cert_fingerprints":
-      ["8E:A0:01:21:C1:C0:D0:C8:DB:CA:EB:4E:8C:8B:D5:B6:8B:59:80:B9:E7:4A:F3:AF:C8:2B:58:DD:C7:CE:34:8F"]
+      ["8E:A0:01:21:C1:C0:D0:C8:DB:CA:EB:4E:8C:8B:D5:B6:8B:59:80:B9:E7:4A:F3:AF:C8:2B:58:DD:C7:CE:34:8F",
+        ["C1:8A:13:D1:1E:78:39:1C:5D:D2:1D:7B:58:0B:C3:E4:4E:40:AE:FD:BD:88:5F:2F:8F:AB:79:54:20:F1:BF:DF"]]
     }
   }
 ]
