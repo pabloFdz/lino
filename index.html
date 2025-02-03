@@ -14,10 +14,6 @@
 
 	<script src="js/lib/wavesurfer-v1.2.3.min.js"></script>
 	<script src="js/lib/wavesurfer.regions-v1.2.3.min.js"></script>
-
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body class="black">
 	<style id="custom-styling"></style>
@@ -238,6 +234,8 @@
 					<img id="zoomout" class="zoom" src="img/fa/zoomout.svg">
 					<input id="slider" data-action="zoom" type="range" min="20" max="1000" value="0" style="width: 80%">
 					<img id="zoomin" class="zoom" src="img/fa/zoomin.svg">
+					<br>
+					<span><sub><i>(Attention! Zoom under experimental development)</i></sub></span>
 				</div>
 	        </div>
       	</div>
@@ -288,7 +286,7 @@
 					<span class="rate-title">Increase Rate by:</span>
 					<br>
 					<button onclick="decreaseRate()">-</button>
-					<input id="rate-growth" class="styled" type="number" name="rate-growth" value="0.01">
+					<input id="rate-growth" class="styled" type="number" name="rate-growth" value="0.01" disabled>
 					<button onclick="increaseRate()">+</button>
 				</div>
 				<div>
@@ -300,7 +298,7 @@
 					<span class="rate-title">every</span>
 					<br>
 					<button onclick="decreaseRateTime()">-</button>
-					<input id="seconds-growth" class="styled" type="number" name="seconds-growth" value="1">
+					<input id="seconds-growth" class="styled" type="number" name="seconds-growth" value="1" disabled>
 					<button onclick="increaseRateTime()">+</button>
 					<br>
 					<span class="rate-title">seconds</span>
