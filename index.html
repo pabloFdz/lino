@@ -2,18 +2,18 @@
 <html>
 <head>
 	<title>Lino - Scratch Trainer</title>
-	
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 	<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="manifest" href="manifest.json" />
-	
-	<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<!-- 	<script class="jsbin" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-	<script class="jsbin" src="//rawgit.com/jquery/jquery-ui/1-11-stable/external/jquery-simulate/jquery.simulate.js"></script> -->
+
+	<script class="jsbin" src="js/lib/jquery.min.js"></script>
 	<script type="text/javascript" src="js/local_storage.js"></script>
 	<script type="text/javascript" src="js/serviceworker.js"></script>
+
+	<script src="js/lib/wavesurfer-v1.2.3.min.js"></script>
+	<script src="js/lib/wavesurfer.regions-v1.2.3.min.js"></script>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,166 +23,172 @@
 	<style id="custom-styling"></style>
 	<div id="menu" class="conf-element">
 		<div class="setting-container center">
-			<img class="menu-item" data-click-action="loops" src="img/loops_section.svg">
-			<img class="menu-item" data-click-action="playlist" src="img/music.svg">
-			<img class="menu-item" data-click-action="playback-rate" src="img/speed.svg">
+			<img class="menu-item" data-click-action="loops" src="img/fa/spin.svg">
+			<img class="menu-item" data-click-action="playlist" src="img/fa/music.svg">
+			<img class="menu-item" data-click-action="playback-rate" src="img/fa/gauge-high.svg">
 			<br class="small-devices">
-			<img class="menu-item" data-click-action="rate-auto" src="img/rate_white.svg">
+			<img class="menu-item" data-click-action="rate-auto" src="img/fa/wand-sparkles.svg">
 			<img class="menu-item" data-click-action="theme" src="img/theme_white.svg">
 		</div>
 	</div>
 	<div id="loops" class="conf-element">
 		<div class="playlist-items-container">
-			<p class="playlist-title">Loops</p>
+			<div class="section-title-container center">
+				<img class="title-icon" src="img/fa/spin.svg">
+				<span class="playlist-title">Loops</span>
+			</div>
+
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop3-82" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop3-82" src="img/fa/play.svg">
 				</div>
 				<label>82 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop10-83" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop10-83" src="img/fa/play.svg">
 				</div>
 				<label>83 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop1-85" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop1-85" src="img/fa/play.svg">
 				</div>
 				<label>85 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop14-87" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop14-87" src="img/fa/play.svg">
 				</div>
 				<label>87 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop16-89" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop16-89" src="img/fa/play.svg">
 				</div>
 				<label>89 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop2-100" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop2-100" src="img/fa/play.svg">
 				</div>
 				<label>100 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop11-119" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop11-119" src="img/fa/play.svg">
 				</div>
 				<label>119 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop15-123" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop15-123" src="img/fa/play.svg">
 				</div>
 				<label>123 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop18-125" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop18-125" src="img/fa/play.svg">
 				</div>
 				<label>125 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop5-125" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop5-125" src="img/fa/play.svg">
 				</div>
 				<label>125 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop12-127" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop12-127" src="img/fa/play.svg">
 				</div>
 				<label>127 BPM</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track loop" data-track-file="track-loop7-130" src="img/play.svg">
+					<img class="menu-item track loop" data-track-icon="play" data-track-file="track-loop7-130" src="img/fa/play.svg">
 				</div>
 				<label>130 BPM</label>
 			</div>
 		</div>
 	</div>
-		<!-- <p class="playlist-separator"></p><br> -->
 
 	<div id="playlist" class="conf-element">
 		<div class="playlist-items-container">
-			<p class="playlist-title">Instrumentals</p>
+			<div class="section-title-container center">
+				<img class="title-icon" src="img/fa/music.svg">
+				<span class="playlist-title">Instrumentals</span>
+			</div>
 
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Get Down" data-track-artist="XL Beats" data-track-file="track-instrumental1" src="img/play.svg">
+					<img src="img/fa/tornado.svg" class="menu-item track instrumental" data-track-icon="tornado" data-track-title="Get Down" data-track-artist="XL Beats" data-track-file="track-instrumental1">
 				</div>
 				<label>Funky</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Fast" data-track-artist="IV Eight" data-track-file="track-instrumental11" src="img/play.svg">
+					<img src="img/fa/biohazard.svg" class="menu-item track instrumental" data-track-icon="biohazard" data-track-title="Fast" data-track-artist="IV Eight" data-track-file="track-instrumental11">
 				</div>
 				<label>DnB</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Smoke" data-track-artist="XL Beats" data-track-file="track-instrumental3" src="img/play.svg">
+					<img src="img/fa/fax.svg" class="menu-item track instrumental" data-track-icon="fax" data-track-title="Smoke" data-track-artist="XL Beats" data-track-file="track-instrumental3">
 				</div>
 				<label>808</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Gritty" data-track-artist="J2" data-track-file="track-instrumental5" src="img/play.svg">
+					<img src="img/fa/radio.svg" class="menu-item track instrumental" data-track-icon="radio" data-track-title="Gritty" data-track-artist="J2" data-track-file="track-instrumental5">
 				</div>
 				<label>Classic</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Sax" data-track-artist="Bargholz" data-track-file="track-instrumental6" src="img/play.svg">
+					<img src="img/fa/wind.svg" class="menu-item track instrumental" data-track-icon="wind" data-track-title="Sax" data-track-artist="Bargholz" data-track-file="track-instrumental6">
 				</div>
 				<label>Jazzy</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="1998" data-track-artist="Raias Beats" data-track-file="track-instrumental7" src="img/play.svg">
+					<img src="img/fa/drum.svg" class="menu-item track instrumental" data-track-icon="drum" data-track-title="1998" data-track-artist="Raias Beats" data-track-file="track-instrumental7">
 				</div>
 				<label>BoomBap</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Bubbles" data-track-artist="XL Beats" data-track-file="track-instrumental2" src="img/play.svg">
+					<img src="img/fa/champagneglasses.svg" class="menu-item track instrumental" data-track-icon="champagneglasses" data-track-title="Bubbles" data-track-artist="XL Beats" data-track-file="track-instrumental2">
 				</div>
 				<label>Club</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Denzel" data-track-artist="Distro" data-track-file="track-instrumental8" src="img/play.svg">
+					<img src="img/fa/wavesquare.svg" class="menu-item track instrumental" data-track-icon="wavesquare" data-track-title="Denzel" data-track-artist="Distro" data-track-file="track-instrumental8">
 				</div>
 				<label>Bass</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Gangsta Funk" data-track-artist="Artacho" data-track-file="track-instrumental9" src="img/play.svg">
+					<img src="img/fa/joint.svg" class="menu-item track instrumental" data-track-icon="joint" data-track-title="Gangsta Funk" data-track-artist="Artacho" data-track-file="track-instrumental9">
 				</div>
 				<label>G-Funk</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Funky" data-track-artist="KIING.D" data-track-file="track-instrumental10" src="img/play.svg">
+					<img src="img/fa/heartpulse.svg" class="menu-item track instrumental" data-track-icon="heartpulse" data-track-title="Funky" data-track-artist="KIING.D" data-track-file="track-instrumental10">
 				</div>
 				<label>Elec. Funk</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="West Coast" data-track-artist="Sosa" data-track-file="track-instrumental12" src="img/play.svg">
+					<img src="img/fa/hatcowboy.svg" class="menu-item track instrumental" data-track-icon="hatcowboy" data-track-title="West Coast" data-track-artist="Sosa" data-track-file="track-instrumental12">
 				</div>
 				<label>West Coast</label>
 			</div>
 			<div class="playlist-item">
 				<div class="track-container">
-					<img class="menu-item track instrumental" data-track-title="Tiger" data-track-artist="XL Beats" data-track-file="track-instrumental4" src="img/play.svg">
+					<img src="img/fa/gopuram.svg" class="menu-item track instrumental" data-track-icon="gopuram" data-track-title="Tiger" data-track-artist="XL Beats" data-track-file="track-instrumental4">
 				</div>
 				<label>Indian</label>
 			</div>
@@ -190,44 +196,48 @@
 
 		<p class="playlist-separator"></p>
 
-
 		<button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Browse Device</button>
 		<input id="audio-upload" class="file-upload-input" type='file' accept="file/*" />
 	</div>
 
 	<div id="waveform" class="conf-element">
 		<div class="please-track">
-			<p>Please choose a track</p>
+			<p>Please choose<br>a track</p>
 			<div class="please-track-opacity"></div>
 		</div>
 		<div class="audio-player">
 	        <div class="player-body">
-				<p class="title"><span id="track-artist">Artist</span> - <span id="track-title">Track Title</span></p>
-				<div id="waveform2" class="waveform"></div>
-	          
-				<div class="controls" style="margin-top: -4em;">
-	          		<div id="controls-play" class="controls">
-	          	        <button id="playButton" class="play-button">
-	          	          <img id="playButtonIcon" class="play-button-icon" src="img/play_white.svg" width="20px" />
-	          	        </button>
-	          	    </div>
-		          	<div class="controls">
-		          		<button id="volume-button">
-							<img id="volumeIcon" class="volume-icon" src="img/volume_white.svg" alt="Volume" />
-		          		</button>
-		          	  <input id="volumeSlider" class="volume-slider" type="range" name="volume-slider" min="0" max="100" value="50" />
-		          	</div>
-		            <div class="timecode">
+				<div class="controls">
+					<div class="title-container">
+						<p class="title">
+							<span id="track-artist">Artist</span> - <span id="track-title">Track Title</span>
+						</p>
+					</div>
+					<div class="timecode">
 						<span id="currentTime">00:00:00</span>
 						<span>/</span>
 						<span id="totalDuration">00:00:00</span>
-		            </div>
+					</div>
+				</div>
+
+				<div class="controls">
+	          		<div id="controls-play" class="controls">
+	          	        <button id="playButton" class="play-button">
+	          	          <img id="playButtonIcon" class="play-button-icon" src="img/fa/playcircle.svg" width="20px" />
+	          	        </button>
+	          	    </div>
+					<button id="volume-button">
+						<img id="volumeIcon" class="volume-icon" src="img/fa/volume.svg" alt="Volume" />
+					</button>
+					<input id="volumeSlider" class="volume-slider" type="range" name="volume-slider" min="0" max="100" value="50" />
           		</div>
 
-				<div class="center">
-					<img id="zoomout" class="zoom" src="img/zoom_out.svg">
+				<div id="waveform2" class="waveform"></div>
+
+				<div class="center" style="margin-top: -4em;">
+					<img id="zoomout" class="zoom" src="img/fa/zoomout.svg">
 					<input id="slider" data-action="zoom" type="range" min="20" max="1000" value="0" style="width: 80%">
-					<img id="zoomin" class="zoom" src="img/zoom_in.svg">
+					<img id="zoomin" class="zoom" src="img/fa/zoomin.svg">
 				</div>
 	        </div>
       	</div>
@@ -253,21 +263,25 @@
 		};
 	</script>
 	<div id="playback-rate" class="conf-element rate-container">
-	  <p for="rate">Adjust playback rate:</p>
+		<div class="section-title-container center">
+			<img class="title-icon" src="img/fa/gauge-high.svg" width="2em">
+			<span for="rate">Playback rate:&nbsp;</span>
+			<span id="multiplier">x</span>
+			<span id="current-pitch">1</span>
+		</div>
+
 	  <input id="rate" type="range" min="0.25" max="3" step="0.01" value="1" />
-	  <div class="pitch">
-	  	<label for="pitch">Preserve<br>track pitch:</label>
-	  	<input type="checkbox" id="pitch" name="pitch" checked />
-	  </div>
-	  <div class="info-text">
-	  	Current: <span id="current-pitch">1</span>
-	  </div>
+
 	  <div class="center">
 	  	<button class="rate-reset" onclick="rateReset()">Reset</button>
 	  </div>
 	</div>
 
 	<div id="rate-auto" class="conf-element">
+		<div class="section-title-container center">
+			<img class="title-icon" src="img/fa/wand-sparkles.svg">
+			<span>Rate automator</span>
+		</div>
 		<div class="growth">
 			<div class="rate-settings-container center">
 				<div class="rate-settings">
@@ -301,7 +315,8 @@
 	</div>
 
 	<div id="theme" class="conf-element center">
-		<div class="theme-selector">
+		<div class="section-title-container center">
+			<img class="title-icon" src="img/theme_white.svg">
 			<span>Change theme color</span>
 		</div>
 		<div>
@@ -347,17 +362,7 @@
 
 	<script type="text/javascript" src="js/constants.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-	<!-- <script type="text/javascript" src="js/wavesurfer.js"></script> -->
-	<!-- <script src="https://unpkg.com/wavesurfer.js@4.6.0/dist/wavesurfer.js"></script> -->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/7.8.1/wavesurfer.min.js" integrity="sha512-/w1TrbQj6MjxduJ6T2AZZILvhxWmdbWaJFT9+C4bd3hqJCPJ6fFi6wHC67zHolLyhncR4SAP+8jwKzmOjwHBhw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/plugin/wavesurfer.regions.min.js"></script>
-
 
 	<script type="text/javascript" src="js/waveform.js"></script>
-
-
 </body>
 </html>

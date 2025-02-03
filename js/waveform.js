@@ -33,9 +33,9 @@ const togglePlay = () => {
   wavesurfer.playPause()
   const isPlaying = wavesurfer.isPlaying()
   if (isPlaying) {
-    playButtonIcon.src = "img/pause.svg"
+    playButtonIcon.src = "img/fa/pausecircle.svg"
   } else {
-    playButtonIcon.src = "img/play_white.svg"
+    playButtonIcon.src = "img/fa/playcircle.svg"
     stopAutoRate()
   }
 }
@@ -49,7 +49,9 @@ const handleVolumeChange = e => {
   const volume = e.target.value / 100
   wavesurfer.setVolume(volume)
   // Save the value to local storage so it persists between page reloads
-  localStorage.setItem("audio-player-volume", volume)
+  localStorage.setItem("audio-player-volume", volume);
+
+  changeVolumeIcon(volume);
 }
 /**
  * Retrieves the volume value from local storage and sets the volume slider
@@ -73,13 +75,21 @@ const formatTimecode = seconds => {
  */
 const toggleMute = () => {
   wavesurfer.toggleMute()
-  const isMuted = wavesurfer.getMute()
-  if (isMuted) {
-    volumeIcon.src = "img/volume_white.svg"
-    volumeSlider.disabled = true
-  } else {
-    volumeSlider.disabled = false
-    volumeIcon.src = "img/volume_white.svg"
+  const isMuted = wavesurfer.isMuted;
+  changeVolumeIcon(isMuted)
+}
+const changeVolumeIcon = (volume) => {
+  if (volume === false) {
+    volume = volumeSlider.value / 100;
+  }
+  if (volume === 0 || volume === true) {
+    volumeIcon.src = "img/fa/mute.svg"
+  }
+  else if (volume > 0.5) {
+    volumeIcon.src = "img/fa/volume.svg"
+  }
+  else if (volume < 0.5) {
+    volumeIcon.src = "img/fa/volumemid.svg"
   }
 }
 // --------------------------------------------------------- //

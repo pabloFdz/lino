@@ -158,13 +158,14 @@ $('#pitch').on('input', function() {
 })
 
 $('#volume').on('input', function() {
-	setVolumeValue();
+	// setVolumeValue();
 })
 
 $('.track').click(function() {
 	//$('#waveform2 wave canvas:not(:first)').remove();
 	//$('#waveform2 region').remove();
-	
+	rateReset();
+
 	let trackName = $(this).attr('data-track-file');
 	trackName = `music/${trackName}.mp3`;
 	loadWaveSurfer(trackName);
@@ -172,8 +173,14 @@ $('.track').click(function() {
 	$('.track.menu-item').removeClass('selected')
 	$(this).addClass('selected');
 
-	$('.track-container').removeClass('playing');
-	$('.track').attr('src', 'img/play.svg');
+	let playingTrack = $('.track-container.playing');
+	let playingTrackImage = $('.track-container.playing img');
+
+	$(playingTrackImage).attr('src', "img/fa/" + $(playingTrackImage).attr('data-track-icon') + ".svg");
+	$(playingTrack).removeClass('playing');
+
+	// $('.track-container').removeClass('playing');
+	// $('.track').attr('src', 'img/play.svg');
 	$(this).parent().addClass('playing');
 	$(this).attr('src', 'img/vynil.gif');
 
