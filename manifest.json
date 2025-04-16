@@ -1,10 +1,10 @@
 {
   "name": "Lino Scratch Trainer",
-  "short_name": "Lino ST",
+  "short_name": "Lino",
   "start_url": "/",
   "icons": [
     {
-      "src": "icons/lino_purple-512.png",
+      "src": "icons/lino512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
